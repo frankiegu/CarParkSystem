@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -95,9 +96,18 @@ public class CodeUtil {
 //        ServletOutputStream sos = resp.getOutputStream();
 //        ImageIO.write(buffImg, "jpeg", sos);
 //        sos.close();
+        
+//        FileOutputStream out = new FileOutputStream(targetFile);  
+//        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);  
+//        encoder.encode(mBufferedImage);  
+        //下面这种写法已经过时，需要更新方法
+//        ServletOutputStream out = resp.getOutputStream();
+//        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+//        encoder.encode(buffImg);
+        //最新方法
+//        FileOutputStream out = new FileOutputStream(targetFile);  
         ServletOutputStream out = resp.getOutputStream();
-        JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-        encoder.encode(buffImg);
+        ImageIO.write(buffImg, "jpg", out);  
         out.flush();
     }
 
