@@ -18,6 +18,8 @@ import org.gzhz.charge.bean.CarOutMsg;
 import org.gzhz.charge.bean.CarPark;
 import org.gzhz.park.bean.CarInfo;
 import org.gzhz.park.bean.CarPort;
+import org.gzhz.park.bean.CarPortView;
+import org.gzhz.park.bean.CarView;
 import org.gzhz.park.bean.SearchPort;
 import org.gzhz.park.dao.ICarInfoDao;
 import org.gzhz.tool.CarChargeUnitl;
@@ -100,6 +102,22 @@ public class ParkHandler {
 		System.out.println("显示停车场出口页面");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/carParkJsp/outCar");
+		return mav;
+	}
+	
+	/** 
+	* @author  作者 E-mail: 郭智雄
+	* @date 创建时间：2018年4月12日 下午08:21:49 
+	* @version 1.0 
+	* @parameter  无
+	* @return  跳转到停车场鸟瞰图页面
+	*/
+	//http://localhost:8080/CarParkSystem/park/onview.action
+	@RequestMapping("/onview.action")
+	public ModelAndView pageToOnView(){
+		System.out.println("显示停车场鸟瞰图页面");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/carParkJsp/carPortView");
 		return mav;
 	}
 	
@@ -399,6 +417,44 @@ public class ParkHandler {
 		map.put("carPortArea", carPortArea);
 		//对提交的数据进行处理结束
 		List<CarPort> resultList = iCarInfoDao.searchAllCarPort(map);
+		Gson gson = new Gson();
+		String data = gson.toJson(resultList);
+		System.out.println(data);
+		return data;
+	}
+	
+	/** 
+	* @author  作者 E-mail: 郭智雄
+	* @date 创建时间：2018年4月24日 下午08:45:49 
+	* @version 1.0 
+	* @parameter  无
+	* @description 查询所有车位信息
+	* @return  List<CarPortView>
+	*/
+	@RequestMapping(value="/searchAllCarParkInfo.action", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public @ResponseBody String searchAllCarParkInfo(){	
+		List<CarPortView> resultList = iCarInfoDao.getAllCarPortInfo();
+				
+		//对提交的数据进行处理结束
+		Gson gson = new Gson();
+		String data = gson.toJson(resultList);
+		System.out.println(data);
+		return data;
+	}
+	
+	/** 
+	* @author  作者 E-mail: 郭智雄
+	* @date 创建时间：2018年4月24日 下午08:45:49 
+	* @version 1.0 
+	* @parameter  无
+	* @description 查询所有车位车辆总视图信息
+	* @return  List<CarView>
+	*/
+	@RequestMapping(value="/searchAllCarInfo.action", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public @ResponseBody String searchAllCarInfo(){	
+		List<CarView> resultList = iCarInfoDao.getAllCarInfo();
+				
+		//对提交的数据进行处理结束
 		Gson gson = new Gson();
 		String data = gson.toJson(resultList);
 		System.out.println(data);

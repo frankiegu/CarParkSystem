@@ -100,4 +100,22 @@
 		update CAR_PARK_INFO_TB set
 		CARPORT_ID=#{carport_id} where CAR_PARK_LICENSE=#{car_park_license}
 	</update>
+<!-- 	根据车库编号或车牌，在车辆车位总视图表中查询信息 -->	
+	<select id="searchCarView" parameterType="org.gzhz.park.bean.CarView"
+		resultType="org.gzhz.park.bean.CarView">
+		select * from CAR_VIEW
+		<trim prefix="where" prefixOverrides="and">
+			<if test="car_park_license!=null"> and CAR_PARK_LICENSE like '%${car_park_license}%'</if>
+			<if test="carport_num!=null"> and CARPORT_NUM like '%${carport_num}%'</if>
+		</trim>
+		order by CARPORT_NUM  
+	</select>
+<!-- 	直接查询车位视图得到当前所有车位信息 -->	
+	<select id="getAllCarPortInfo" resultType="org.gzhz.park.bean.CarPortView">
+		select * from CAR_PORT_VIEW order by CARPORT_NUM  
+	</select>
+<!-- 	直接查询车辆和车位总视图得到当前所有信息 -->	
+	<select id="getAllCarInfo" resultType="org.gzhz.park.bean.CarView">
+		select * from CAR_VIEW order by CARPORT_NUM  
+	</select>
 </mapper>

@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" > </link>  
 <script type="text/javascript" charset="UTF-8" src="js/jquery-3.3.1.js" ></script>
 <script type="text/javascript" charset="UTF-8" src= "js/bootstrap.js"></script>
+<script type="text/javascript" charset="UTF-8" src="js/my/fabric.min.js"></script>
 <script type="text/javascript" charset="UTF-8" src= "js/my/enterCar.js"></script>
 
 <script type="text/javascript" language="javascript">
@@ -71,6 +72,7 @@
 	<div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
+			<div class="col-sm-8">
 			<div class="jumbotron">
 				<h1>
 					停车场入口页面
@@ -79,13 +81,7 @@
 					综合显示停车场内所有信息
 				</p>
 			</div>
-		</div>
-	</div>
-	<div class="row clearfix">
-		<div class="col-md-2 column">
-		</div>
-		<font color="white">
-		<div class="col-md-8 column">
+			<font color="white">
 <!-- 		手工输入车牌部分开始 -->
 				<div class="form-group">
 					 <label for="inputEmail3" class="col-sm-4 control-label">请输入车牌：</label>
@@ -123,14 +119,22 @@
 					</div>
 					<label for="inputEmail3" class="col-sm-5 control-label">车辆进入传感器2：</label>
 					<div class="col-sm-6">
-						<button onclick="carSensor1()" class="btn btn-default">触发传感器2</button>
-					</div>	
-				</div>
+						<button onclick="carSensor2()" class="btn btn-default">触发传感器2</button>
+					</div>
+				</div>	
 <!-- 		车辆传感器部分结束 -->   	
+			</font>
+			</div>
+			<div class="col-sm-4">
+			<!-- 		停车场入口道闸画布开始 -->
+			<canvas id="myCanvas" width="500" height="400"></canvas>
+			<!-- 		停车场入口道闸画布结束 -->
+			</div>
+		</div>
+	</div>
+	<div class="row clearfix">
+		
 
-	
-
-		</font>
 		<div class="col-md-2 column">
 		</div>
 	</div>
@@ -139,6 +143,7 @@
 		</div>
 	</div>
 	<div class="row clearfix">
+	
 <!-- 		LED显示屏部分开始 -->
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=1000 
       background=img/led.png align=center height=40>
