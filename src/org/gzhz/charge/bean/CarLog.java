@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 * @since  
 * @return  
 */
-@Component
+
 public class CarLog {
 	
 	private int car_log_id;

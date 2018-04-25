@@ -44,7 +44,8 @@ public class SystemLogAspect {
 	//第一个星代表包上层的包，第二个..*代表包下面不论多少层的类,第三个*(..)第二个条件中的任意方法任意参数
 //    @Pointcut("execution (* org.great.aoplog..*.*(..))")  
 //    @Pointcut("execution (* org.gzhz..*.*(..))") 
-	@Pointcut("execution (org.gzhz.tool.MyDateUnitl.*(..)") 
+//	@Pointcut("execution (org.gzhz.tool.MyDateUnitl.*)") 
+	@Pointcut("execution(* org.gzhz.tool.MyDateUnitl.*(..))")
     public  void controllerAspect() {  
     }  
     
