@@ -18,6 +18,7 @@ import org.gzhz.charge.bean.CarOutMsg;
 import org.gzhz.charge.bean.CarPark;
 import org.gzhz.park.bean.CarInfo;
 import org.gzhz.park.bean.CarPort;
+import org.gzhz.park.bean.CarPortAndCarView;
 import org.gzhz.park.bean.CarPortView;
 import org.gzhz.park.bean.CarView;
 import org.gzhz.park.bean.SearchPort;
@@ -236,8 +237,10 @@ public class ParkHandler {
 		ServletContext servletContext = request.getServletContext();
 		String str = carParkUnitl.getImage(file, servletContext, "入库");	//得到图片的存储路径
 		String carLicense = carParkUnitl.recognitionCarImage(str);			//根据路径找到图片并识别车牌
+		//查找参数表中车位状态——使用中的参数ID
+		Integer pid = iCarInfoDao.searchParameterIDByName("使用中");
 		//根据图片路径和车库编号构建一个车库类
-		CarPort cp = new CarPort(carPort_num, str);
+		CarPort cp = new CarPort(carPort_num, str,pid);
 		//查询参数表中车位使用中的参数对应ID,更新到车库类中
 		int i = iCarInfoDao.updateCarPortTB(cp);
 		if(i == 1){
@@ -276,8 +279,10 @@ public class ParkHandler {
 		ServletContext servletContext = request.getServletContext();
 		String str = carParkUnitl.getImage(file, servletContext, "出库");	//得到图片的存储路径
 		String carLicense = carParkUnitl.recognitionCarImage(str);			//根据路径找到图片并识别车牌
+		//查找参数表中车位状态——使用中的参数ID
+		Integer pid = iCarInfoDao.searchParameterIDByName("未使用");
 		//根据图片路径和车库编号构建一个车库类
-		CarPort cp = new CarPort(carPort_num, "无");
+		CarPort cp = new CarPort(carPort_num, "无",pid);
 		//查询参数表中车位使用中的参数对应ID,更新到车库类中
 		int i = iCarInfoDao.updateCarPortTB(cp);
 		if(i == 1){
@@ -453,6 +458,25 @@ public class ParkHandler {
 	@RequestMapping(value="/searchAllCarInfo.action", method=RequestMethod.POST, produces="application/json;charset=utf-8")
 	public @ResponseBody String searchAllCarInfo(){	
 		List<CarView> resultList = iCarInfoDao.getAllCarInfo();
+				
+		//对提交的数据进行处理结束
+		Gson gson = new Gson();
+		String data = gson.toJson(resultList);
+		System.out.println(data);
+		return data;
+	}
+	
+	/** 
+	* @author  作者 E-mail: 郭智雄
+	* @date 创建时间：2018年4月24日 下午08:45:49 
+	* @version 1.0 
+	* @parameter  无
+	* @description 查询所有车位与停放的车辆总视图信息
+	* @return  List<CarPortAndCarView>
+	*/
+	@RequestMapping(value="/searchAllCarParkAndCarInfo.action", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	public @ResponseBody String searchAllCarParkAndCarInfo(){	
+		List<CarPortAndCarView> resultList = iCarInfoDao.getAllCarPortAndCarInfo();
 				
 		//对提交的数据进行处理结束
 		Gson gson = new Gson();

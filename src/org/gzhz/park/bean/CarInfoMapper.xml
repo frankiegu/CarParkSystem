@@ -88,7 +88,7 @@
 <!-- 	根据车库编号和车辆入库图片，对停车位数据库进行更新 -->	
 	<update id="updateCarPortTB" parameterType="org.gzhz.park.bean.CarPort">
 		update CARPORT_TB set
-		PICTURE_URL=#{picture_url} where CARPORT_NUM=#{carport_num}
+		PICTURE_URL=#{picture_url},CARPORT_STATUS=#{carport_status} where CARPORT_NUM=#{carport_num}
 	</update>
 <!-- 	根据车库编号查询车库ID -->	
 	<select id="searchCarPortID" parameterType="org.gzhz.park.bean.CarPort"
@@ -117,5 +117,9 @@
 <!-- 	直接查询车辆和车位总视图得到当前所有信息 -->	
 	<select id="getAllCarInfo" resultType="org.gzhz.park.bean.CarView">
 		select * from CAR_VIEW order by CARPORT_NUM  
+	</select>
+<!-- 	直接查询车位和车辆左连接视图得到当前所有信息 -->	
+	<select id="getAllCarPortAndCarInfo" resultType="org.gzhz.park.bean.CarPortAndCarView">
+		select * from CARPORT_VIEW order by CARPORT_NUM  
 	</select>
 </mapper>

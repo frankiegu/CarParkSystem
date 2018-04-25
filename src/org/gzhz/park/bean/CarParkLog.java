@@ -1,12 +1,15 @@
 package org.gzhz.park.bean;
+
+import org.springframework.stereotype.Component;
+
 /** 
 * @author  作者 E-mail: 郭智雄
 * @date 创建时间：2018年4月13日 下午4:19:00 
 * @version 1.0 
 * @description 停车场日志表类
 */
-
-public class CarLog {
+@Component
+public class CarParkLog {
 	
 	private Integer car_log_id;			//日志表ID
 	private String 	car_park_license;	//车辆车牌
@@ -18,7 +21,7 @@ public class CarLog {
 	private Integer car_money;			//消费金额
 	private String 	picture_url;		//车牌图片地址
 	
-	public CarLog() {
+	public CarParkLog() {
 		super();
 	}
 

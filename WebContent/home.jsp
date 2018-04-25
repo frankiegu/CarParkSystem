@@ -47,9 +47,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	 <!-- 	停车场车库开始 -->
       	<li><a href="park/carPort.action">车场车库界面</a></li>
       	<!-- 	停车场车库结束 -->
-      	 <!-- 	停车场出口开始 -->
+      	<!-- 	停车场出口开始 -->
       	<li><a href="park/export.action">停车出口</a></li>
       	<!-- 	停车场出口结束 -->
+      	<!-- 	停车场鸟瞰图开始 -->
+      	<li><a href="park/onview.action">停车场鸟瞰图</a></li>
+      	<!-- 	停车场鸟瞰图结束 -->
        	<li><a href="emp/pageLogin.action">员工登录</a></li>
        	<li><a href="pageShift.action?req=admin_login">会员登录</a></li>
         <li><a href="#">帮助</a></li>

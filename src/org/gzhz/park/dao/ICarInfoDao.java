@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.gzhz.park.bean.CarInfo;
 import org.gzhz.park.bean.CarPort;
+import org.gzhz.park.bean.CarPortAndCarView;
 import org.gzhz.park.bean.CarPortView;
 import org.gzhz.park.bean.CarView;
 import org.gzhz.park.bean.SearchPort;
@@ -46,4 +47,7 @@ public interface ICarInfoDao {
 	public List<CarPortView> getAllCarPortInfo();
 	//直接查询当前停车场所有车位状态
 	public List<CarView> getAllCarInfo();
+	//直接查询当前停车场所有车位及停车状态信息
+	public List<CarPortAndCarView> getAllCarPortAndCarInfo();
+	
 }
